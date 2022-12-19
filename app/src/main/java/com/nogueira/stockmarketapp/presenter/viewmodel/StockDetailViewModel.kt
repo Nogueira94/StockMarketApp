@@ -26,17 +26,15 @@ class StockDetailViewModel(
 
     fun getStockDetail(symbol : String){
         viewModelScope.launch {
-            getStockDetailUseCase.invoke(symbol).collect{ result ->
-                _stockDetail.value = result
-            }
+            _stockDetail.value = ResultState.Loading
+            _stockDetail.value = getStockDetailUseCase.invoke(symbol)
         }
     }
 
     fun getStockHistoric(symbol: String) {
         viewModelScope.launch {
-            getStockHistoricUseCase.invoke(symbol).collect{ result ->
-                _stockHistoric.value = result
-            }
+            _stockHistoric.value = ResultState.Loading
+            _stockHistoric.value = getStockHistoricUseCase.invoke(symbol)
         }
     }
 

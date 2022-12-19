@@ -3,16 +3,11 @@ package com.nogueira.stockmarketapp.domain
 import com.nogueira.network.ApiResult
 import com.nogueira.stockmarketapp.data.model.StockDetailResponse
 import com.nogueira.stockmarketapp.data.repository.StockRepo
-import com.nogueira.stockmarketapp.domain.model.StockDetail
-import com.nogueira.stockmarketapp.domain.model.toStockDetail
 import com.nogueira.stockmarketapp.domain.usecase.GetStockDetail
 import com.nogueira.stockmarketapp.util.ResultState
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -76,9 +71,25 @@ internal class GetStockDetailTest {
             coEvery { getStockDetail(stockDetail.Symbol!!) } returns ApiResult.Success(stockDetail)
         }
 
-        val flow : Flow<ResultState<StockDetail>> = GetStockDetail(mockRepo).invoke(stockDetail.Symbol!!)
+        val result = GetStockDetail(mockRepo).invoke(stockDetail.Symbol!!)
 
-        assertEquals(flow,ResultState.Success(stockDetail.toStockDetail()))
+        assertTrue(result is ResultState.Success)
+
+        val dataLoaded = result as ResultState.Success
+
+        assertEquals(stockDetail.Symbol,dataLoaded.data.symbol)
+
+    }
+
+    @Test
+    fun `teste domain layer when GetStockDetail() fail`() = runTest {
+        val mockRepo = mockk<StockRepo> {
+            coEvery { getStockDetail(stockDetail.Symbol!!) } returns ApiResult.Error(404,"Test exception")
+        }
+
+        val result = GetStockDetail(mockRepo).invoke(stockDetail.Symbol!!)
+
+        assertTrue(result is ResultState.Error)
 
     }
 

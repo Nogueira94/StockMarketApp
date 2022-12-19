@@ -17,9 +17,8 @@ class StockListViewModel(private val getStockListUseCase: GetStockListUseCase) :
 
     fun getStockList(){
         viewModelScope.launch {
-            getStockListUseCase.invoke().collect{ result ->
-                _stockListState.value = result
-            }
+            _stockListState.value = ResultState.Loading
+            _stockListState.value = getStockListUseCase.invoke()
         }
     }
 
