@@ -1,0 +1,95 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presenter.view.StockDetailFragment"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/stock_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/stock_name"
+        android:textSize="20sp"
+        tools:text="IBM"/>
+
+    <TextView
+        android:id="@+id/stock_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/stock_symbol"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        tools:text="IBM"/>
+
+    <TextView
+        android:id="@+id/stock_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stock_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="14sp"
+        android:gravity="center"
+        tools:text="IBM"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/text_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/stock_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/chart_historic"
+        android:background="@color/shimmer_color"/>
+
+    <TextView
+        android:id="@+id/stock_last_close_price"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stock_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_bias="0"
+        tools:text="Close Price: C$390,09"/>
+
+    <TextView
+        android:id="@+id/stock_ytd_price"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stock_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_bias="1"
+        tools:text="TYD : 30%"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/chart_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/chart_historic"
+        app:layout_constraintBottom_toBottomOf="@id/chart_historic"
+        android:background="@color/shimmer_color"/>
+
+    <com.nogueira.designsystem.StockChart
+        android:id="@+id/chart_historic"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stock_ytd_price"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.nogueira.stockmarketapp'
+    compileSdk versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.nogueira.stockmarketapp"
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "ALPHA_VANTAGE_API_KEY", '"M56WEER41IV0S5X0"'
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+    implementation project(":network:")
+    implementation project(":designsystem:")
+
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.nav_version}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.nav_version}"
+
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycleVersion}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycleVersion}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycleExtensionsVersion}"
+
+    implementation "androidx.core:core-ktx:${versions.ktx}"
+    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
+    implementation "com.google.android.material:material:${versions.material}"
+
+    implementation "com.opencsv:opencsv:${versions.opencsv}"
+
+    implementation "com.github.PhilJay:MPAndroidChart:${versions.mpchart}"
+
+    implementation "com.facebook.shimmer:shimmer:${versions.shimmer}"
+
+    implementation "io.insert-koin:koin-android:${versions.koin}"
+    implementation "io.insert-koin:koin-android-compat:${versions.koin}"
+    implementation "io.insert-koin:koin-androidx-workmanager:${versions.koin}"
+    implementation "io.insert-koin:koin-androidx-navigation:${versions.koin}"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines_test}"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "io.mockk:mockk-android:${versions.mockk}"
+    testImplementation "io.mockk:mockk-agent:${versions.mockk}"
+    testImplementation "io.mockk:mockk:${versions.mockk}"
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+}

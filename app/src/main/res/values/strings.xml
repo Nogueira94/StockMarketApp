@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Stock Market App</string>
+    <string name="ytd_text">YTD: $%1$s</string>
+    <string name="last_value">Close Price: $%1$s</string>
+    <string name="error_text">Error, please try again!</string>
+</resources>
